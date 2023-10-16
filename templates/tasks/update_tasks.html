@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load tailwind_filters %}
+{% load crispy_forms_tags %}
+
+
+
+{% block title %} {{form.title.value}} {% endblock  %} 
+
+
+
+
+{% block content %}
+
+
+
+<div class="w-screen flex flex-col items-center mx-auto my-5 overflow-y-scroll">
+
+<div class="text-center font-bold text-gray-600">Update Task</div>
+
+
+{% if messages %}
+
+{% for message in messages %}
+
+<div class="py-3 mx-auto bg-green-700">
+
+{{message}}
+</div>
+
+{% endfor %}
+
+
+{% endif %}
+
+
+
+<div class="p-3 mx-auto">
+
+<form method="post">
+
+{% csrf_token %}
+
+
+{{form|crispy}}
+
+<div class="flex justify-around mt-3">
+
+    <a href="{% url "profile" %}" class="py-2 px-4 bg-yellow-700 text-gray-50 rounded-md">Back</a>
+    <button type="submit" class="bg-black text-gray-50 py-2 px-3 rounded-md">Update</button>
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+{% endblock content %}

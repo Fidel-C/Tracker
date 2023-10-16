@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% load static %}
+{% load tailwind_filters %}
+{% load crispy_forms_tags %}
+
+
+{% block title %}
+Oranisations
+{% endblock title %}
+
+
+{% block content %}
+
+ 
+
+
+<div class="flex flex-col items-center w-full  overflow-x-hidden overflow-y-scroll">
+    <div class="text-center font-bold text-green-500 mt-5">Create New Organisation</div>
+
+<div class="m-auto w-4/5 p-3">
+    <form method="post" enctype="multipart/form-data" class="w-full">
+{% csrf_token %}
+
+{{form|crispy}}
+
+<div class="flex justify-around mt-3">
+<a  href="{% url "profile" %}" class="bg-black text-gray-50 py-2 px-3 rounded-md font-bold">Back</a>
+<button type="submit" class="bg-yellow-700 text-gray-50 py-2 px-3 rounded-md font-bold">Create</button>
+
+</div>
+</form>
+
+</div>
+
+
+{% comment %} divider {% endcomment %}
+<div class="h-2 w-screen bg-yellow-950"></div>
+
+
+<div class="text-center font-bold my-5">My Organisations</div>
+
+
+<div class="mx-auto bg-gray-100 mt-5 overflow-x-scroll w-11/12 p-1">
+
+    {% if orgs %}
+    
+  <table class="mx-auto w-full">
+  <thead class="text-left border-b-2 border-gray-300">
+  <tr >
+<th class="p-2">Name</th>
+<th class="p-2">logo</th>
+<th class="p-2">Details</th>
+
+  </tr>
+
+  </thead>
+  
+
+  <tbody class="text-left">
+{% for org in orgs %}
+
+<tr>
+<td class="font-bold text-yellow-600 p-2">{{org.name}}</td>
+
+<td><img class="h-10 w-10  rounded-full p-2" src="{{org.logo.url}}" alt="Logo" srcset=""></td>
+
+<td class="p-2">
+    <textarea disabled class="rounded-md italic text-xs text-gray-600 font-bold border-none">{{org.description}}</textarea>
+</td>
+
+<td class="p-2">
+    <a href="{% url "company_details" org.id %}" class="py-2 px-3 bg-black text-gray-50 rounded-md translate-y-3">Settings</a>
+</td>
+
+</tr>
+
+{% endfor %}
+
+
+  </tbody>
+  </table>
+    
+    
+    {% else %}
+
+    <div class="text-center font-bold">No Organisations Yet!</div>
+    {% endif %}
+
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+{% endblock content %}

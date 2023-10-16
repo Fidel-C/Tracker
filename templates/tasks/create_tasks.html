@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% load tailwind_filters %}
+{% load crispy_forms_tags %}
+
+
+
+{% block title %}Create Entry{% endblock title %}
+
+
+{% block content %}
+
+<div class="overflow-x-hidden p-2 flex flex-col items-center overflow-y-scroll">
+
+
+
+    <div class=" text-2xl text-green-500 text-center font-bold">Create Entry</div>
+
+
+<div class="flex items-center p-3 w-4/5">
+
+
+
+    <div class="mx-auto w-full">
+
+        <form   method="post">
+
+            {% csrf_token %}
+
+
+            {{form|crispy}}
+
+
+
+      <div class="flex p-3 items-center mx-auto justify-center">
+        <div class="mr-3">
+            <a class="px-3 py-2 bg-black text-green-50  rounded-md inline-block" href="{% url "profile" %}">Back</a>
+        </div>
+
+        <div class="ml-3">
+        <button type="submit" class="px-4 py-2 bg-green-500 text-green-50 rounded-md inline-block">Add</button>
+
+        </div>
+
+      </div>
+        </form>
+
+
+
+
+    </div>
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+{% endblock content %}
